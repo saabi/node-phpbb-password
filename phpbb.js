@@ -66,7 +66,7 @@ function _hash_gensalt_private(input, iteration_count_log2)
         iteration_count_log2 = 8;
     }
 
-    var output = '$H$';
+    var output = '$P$';
     output += itoa64[Math.min(iteration_count_log2 + 5, 30)];
     output += _hash_encode64(input, 6);
 
@@ -121,7 +121,8 @@ function _hash_crypt_private(password, setting)
     var output = '*';
 
     // Check for correct hash
-    if (setting.substr(0, 3) != '$H$')
+    id = setting.substr(0, 3);
+    if (id != '$H$' && id != '$P$')
     {
         return output;
     }
